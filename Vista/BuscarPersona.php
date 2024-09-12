@@ -18,18 +18,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buscar Persona</title>
     <link rel="stylesheet" href="assets/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <script src="assets/js/jquery-3.7.1.min.js"></script>
+    <script src="assets/js/jquery.validate.js"></script>
+    <link rel="stylesheet" href="assets/css/validate.css">
 </head>
 <body class="conteiner-fluid bg-secondary-subtle">
     <div class="conteiner-m conteiner-fluid bg-secondary-subtle">
         <div class="conteiner mx-5">
             <div class="conteiner mx-5 p-5 text-center">
                 <div class="bg-light-subtle border border-2 border-secondary rounded shadow mx-5 p-5">
-                <h3>Buscar Auto</h3>
+                <h3>Buscar Persona</h3>
 
-                <form action="accion/accionBuscarAuto.php" method=POST>
+                <form action="accion/accionBuscarPersona.php" method=POST>
                     <div class="mb-3">
-                    <label for="Patente">Ingrese la patente</label><br>
-                    <input type="text" name="Patente" id="Patente">
+                    <label for="NroDni">Ingrese el DNI de la persona</label><br>
+                    <input type="text" name="NroDni" id="NroDni" class="form-control">
                     </div>
                     <button type="submit" class="btn btn-primary">Buscar</button>
                 </form>

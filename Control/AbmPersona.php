@@ -109,7 +109,10 @@ class AbmPersona{
                 $where.=" and NroDni =".$param['NroDni'];
            
         }
-        $arreglo = Persona::listar($where);  
+        $arreglo = Persona::listar($where);
+        if(count($arreglo) < 0){
+            
+        }
         return $arreglo;
             
         
