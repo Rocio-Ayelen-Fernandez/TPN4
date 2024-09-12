@@ -19,7 +19,26 @@
     <title>Buscar Persona</title>
     <link rel="stylesheet" href="assets/bootstrap-5.3.3-dist/css/bootstrap.min.css">
 </head>
-<body>
+<body class="conteiner-fluid bg-secondary-subtle">
+    <div class="conteiner-m conteiner-fluid bg-secondary-subtle">
+        <div class="conteiner mx-5">
+            <div class="conteiner mx-5 p-5 text-center">
+                <div class="bg-light-subtle border border-2 border-secondary rounded shadow mx-5 p-5">
+                <h3>Buscar Auto</h3>
+
+                <form action="accion/accionBuscarAuto.php" method=POST>
+                    <div class="mb-3">
+                    <label for="Patente">Ingrese la patente</label><br>
+                    <input type="text" name="Patente" id="Patente">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                </form>
+                </div>
+
+            </div>
+            
+        </div>
+    </div>
     
 </body>
 </html>
