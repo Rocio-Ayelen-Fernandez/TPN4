@@ -17,8 +17,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nuevo Auto</title>
-    <script src="assets/bootstrap-5.3.3-dist/js/bootstrap.min.js "></script>
+    
     <link rel="stylesheet" href="assets/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <script src="assets/js/jquery-3.7.1.min.js"></script>
+    <script src="assets/js/jquery.validate.js"></script>
+    <link rel="stylesheet" href="assets/css/validate.css">
+
 </head>
 <body class="conteiner-fluid bg-secondary-subtle">
     <div class="conteiner-m conteiner-fluid bg-secondary-subtle">
@@ -27,7 +31,7 @@
                 <div class="bg-light-subtle border border-2 border-secondary rounded shadow mx-5 p-5">
                 
                 <h3>Nuevo Auto</h3>
-                <form action="accion/accionNuevoAuto.php" method=POST class="needs-validation" novalidate>
+                <form id="form" action="accion/accionNuevoAuto.php" method=POST class="needs-validation" novalidate>
                 <div class="mb-3">
                     <label for="DniDuenio" class="form-label">Ingrese el DNI del dueño</label>
                     <input type="text" class="form-control" name="DniDuenio" id="DniDuenio" required>
@@ -67,37 +71,53 @@
     
 </body>
 
-<!-- <script>
-    (() => {
-        'use strict'
+<script>
+    $.validator.addMethod("regex", function(value, element, regexp) {
+        var re = new RegExp(regexp);
+        return this.optional(element) || re.test(value);
+    }, "Por favor, ingrese un valor válido.");
+    $("#form").validate({
+        rules: {
+            DniDuenio: {
+                required: true,
+                regex: "\d{8}"
+            },
+            Patente: {
+                required: true,
+                regex: /^[A-Z]{3} \d{3}$/
+            },
+            Marca: {
+                required: true,
+                minlenght: 2,
+                maxlenght: 50,
+            },
+            Modelo: {
+                required: true,
+                minlenght: 2,
+                maxlenght: 4,
+            }
+        },
+        messages: {
+            DniDuenio: {
+                required: "Por favor ingrese el DNI del dueño",
+                regex: "El DNI debe tener 8 dígitos numéricos."
+            },
+            Patente: {
+                required: "Por favor ingrese la patente",
+                regex: "La patente debe tener el formato 'ABC 123'"
+            },
+            Marca: {
+                required: "Por favor ingrese la marca",
+                minlenght: "La marca debe tener al menos 2 caracteres",
+                maxlenght: "La marca no puede tener más de 50 caracteres"
+            },
+            Modelo: {
+                required: "Por favor ingrese el modelo",
+                minlenght: "El modelo debe tener al menos 2 caracteres",
+                maxlenght: "El modelo no puede tener más de 4 caracteres"
+            }
+        }
+    });
+</script>
 
-        const forms = document.querySelectorAll('.needs-validation')
-
-        Array.from(forms).forEach(form => {
-            form.addEventListener('submit', event => {
-                const campoDni = form.querySelector('#NroDni');
-                const campoApellido = form.querySelector('#Apellido');
-                const campoNombre = form.querySelector('#Nombre');
-                const campoTelefono = form.querySelector('#Telefono');
-                const valorDni = campoDni.value;
-                const dniValido = /^\d{8}$/;
-
-                if (!dniValido.test(valorDni)) {
-                    campoDni.setCustomValidity('El DNI debe tener 8 dígitos numéricos.');
-                    campoDni.classList.add('is-invalid');
-                } else {
-                    campoDni.setCustomValidity('');
-                    campoDni.classList.remove('is-invalid');
-                }
-
-                if (!form.checkValidity()) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-
-                form.classList.add('was-validated');
-            }, false);
-        });
-    })();
-</script> -->
 </html>
