@@ -19,8 +19,16 @@ $objAuto = $objAbmAuto->buscar($datos);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accion_Buscar_Auto</title>
     <link rel="stylesheet" href="../assets/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
+
 <body class="conteiner-fluid bg-secondary-subtle"> 
+
+<!-- Navbar -->
+<?php include_once("../Estructura/Navbar.php"); ?>
+
+<main class="container my-5">
+
     <div class="row justify-content-center m-auto">
         <div class="conteiner m-5 w-75 ">
             <div class="conteiner mx-5 p-5 text-center  ">
@@ -64,8 +72,12 @@ $objAuto = $objAbmAuto->buscar($datos);
             
         </div>
     </div>
-    
-    
+
+    </main>
+    <!-- Footer -->
+     <script src="../assets/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+    <?php include_once("../Estructura/Footer.php"); ?>
+
 </body>
 
 </html>

@@ -19,13 +19,19 @@
     <script src="assets/js/jquery-3.7.1.min.js"></script>
     <script src="assets/js/jquery.validate.js"></script>
     <link rel="stylesheet" href="assets/css/validate.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="conteiner-fluid bg-secondary-subtle">
+ <!-- Navbar -->
+ <?php include_once("Estructura/Navbar.php"); ?>
+
+<main class="container my-5">
+
     <div class="conteiner-m conteiner-fluid bg-secondary-subtle">
         <div class="conteiner mx-5">
             <div class="conteiner mx-5 p-5 text-center">
                 <div class="bg-light-subtle border border-2 border-secondary rounded shadow mx-5 p-5">
-                <h3>Buscar Auto</h3>
+                <h3>Cambio Duenio</h3>
 
                 <form id="form" action="accion/accionCambioDuenio.php" method=POST>
                     <div class="mb-3">
@@ -44,38 +50,15 @@
             
         </div>
     </div>
+
+    </main>
+<script src="assets/js/CambiarDuenio.js"></script>
+
+    <!-- Footer -->
+     <script src="assets/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+    <?php include_once("Estructura/Footer.php"); ?>
+    
 </body>
 
-<script>
-    $.validator.addMethod("regex", function(value, element, regexp) {
-        var re = new RegExp(regexp);
-        return this.optional(element) || re.test(value);
-    }, "El formato es inválido.");
-
-    $("#form").validate({
-        rules: {
-            Patente: {
-                required: true,
-                regex: /^[a-zA-Z]{3} \d{3}$/
-            },
-            NroDni: {
-                required: true,
-                regex: /^\d{1,10}$/
-            }
-
-        },
-        messages: {
-            Patente:{
-                required: "Por favor ingrese la patente",
-                regex: "La patente debe tener 3 letras y 3 números"
-            },
-            NroDni: {
-                required: "Por favor ingrese el DNI",
-                regex: "El DNI debe tener entre 1 y 10 dígitos numéricos"
-            }
-        }
-    });
-
-</script>
 
 </html>

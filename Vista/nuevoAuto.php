@@ -22,9 +22,16 @@
     <script src="assets/js/jquery-3.7.1.min.js"></script>
     <script src="assets/js/jquery.validate.js"></script>
     <link rel="stylesheet" href="assets/css/validate.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 
 </head>
 <body class="conteiner-fluid bg-secondary-subtle">
+
+<!-- Navbar -->
+<?php include_once("Estructura/Navbar.php"); ?>
+
+<main class="container my-5">
+
     <div class="conteiner-m conteiner-fluid bg-secondary-subtle">
         <div class="conteiner mx-5">
             <div class="conteiner mx-5 p-5 text-center">
@@ -68,56 +75,16 @@
             
         </div>
     </div>
+
+    </main>
+    <script src="assets/js/nuevoAuto.js"></script>
+
+    <!-- Footer -->
+     <script src="assets/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+    <?php include_once("Estructura/Footer.php"); ?>
+    
     
 </body>
 
-<script>
-    $.validator.addMethod("regex", function(value, element, regexp) {
-        var re = new RegExp(regexp);
-        return this.optional(element) || re.test(value);
-    }, "Por favor, ingrese un valor válido.");
-    $("#form").validate({
-        rules: {
-            DniDuenio: {
-                required: true,
-                regex: "\d{8}"
-            },
-            Patente: {
-                required: true,
-                regex: /^[A-Z]{3} \d{3}$/
-            },
-            Marca: {
-                required: true,
-                minlenght: 2,
-                maxlenght: 50,
-            },
-            Modelo: {
-                required: true,
-                minlenght: 2,
-                maxlenght: 4,
-            }
-        },
-        messages: {
-            DniDuenio: {
-                required: "Por favor ingrese el DNI del dueño",
-                regex: "El DNI debe tener 8 dígitos numéricos."
-            },
-            Patente: {
-                required: "Por favor ingrese la patente",
-                regex: "La patente debe tener el formato 'ABC 123'"
-            },
-            Marca: {
-                required: "Por favor ingrese la marca",
-                minlenght: "La marca debe tener al menos 2 caracteres",
-                maxlenght: "La marca no puede tener más de 50 caracteres"
-            },
-            Modelo: {
-                required: "Por favor ingrese el modelo",
-                minlenght: "El modelo debe tener al menos 2 caracteres",
-                maxlenght: "El modelo no puede tener más de 4 caracteres"
-            }
-        }
-    });
-</script>
 
 </html>
