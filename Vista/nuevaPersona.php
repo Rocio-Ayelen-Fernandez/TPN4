@@ -17,6 +17,9 @@
     <title>Nueva Persona</title>
     <script src="assets/bootstrap-5.3.3-dist/js/bootstrap.min.js "></script>
     <link rel="stylesheet" href="assets/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <script src="assets/js/jquery-3.7.1.min.js"></script>
+    <script src="assets/js/jquery.validate.js"></script>
+    <link rel="stylesheet" href="assets/css/validate.css">
 </head>
 <body class="conteiner-fluid bg-secondary-subtle">
     <div class="conteiner-m conteiner-fluid bg-secondary-subtle">
@@ -24,48 +27,36 @@
             <div class="conteiner mx-5 p-5 text-center">
                 <div class="bg-light-subtle border border-2 border-secondary rounded shadow mx-5 p-5">
                 <h3> Nueva Persona</h3>
-                <form action="accion/accionNuevaPersona.php" method=POST class="needs-validation" novalidate>
+                <form id="form" action="accion/accionNuevaPersona.php" method=POST class="needs-validation" novalidate>
                 <div class="mb-3">
                     <label for="NroDni" class="form-label">Ingrese el DNI</label>
                     <input type="text" class="form-control" name="NroDni" id="NroDni" required>
-                    <div class="invalid-feedback">
-                        El DNI debe tener 8 dígitos numéricos.
-                    </div>
+                    
                 </div>
                 <div class="mb-3">
                     <label for="Apellido" class="form-label">Ingrese el Apellido</label>
                     <input type="text" class="form-control" name="Apellido" id="Apellido" required>
-                    <div class="invalid-feedback">
-                        Por favor ingrese un apellido.
-                    </div>
+                    
                 </div>
                 <div class="mb-3">
                     <label for="Nombre" class="form-label">Ingrese el Nombre</label>
                     <input type="text" class="form-control" name="Nombre" id="Nombre" required>
-                    <div class="invalid-feedback">
-                        Por favor ingrese un nombre.
-                    </div>
+                    
                 </div>
                 <div class="mb-3">
                     <label for="fechaNac" class="form-label">Ingrese la Fecha de Nacimiento</label>
                     <input type="date" class="form-control" name="fechaNac" id="fechaNac" required>
-                    <div class="invalid-feedback">
-                        Por favor ingrese una fecha de nacimiento.
-                    </div>
+                    
                 </div>
                 <div class="mb-3">
                     <label for="Telefono" class="form-label">Ingrese el Telefono</label>
                     <input type="text" class="form-control" name="Telefono" id="Telefono" required pattern="\d{10}">
-                    <div class="invalid-feedback">
-                        Por favor ingrese un teléfono válido (10 dígitos).
-                    </div>
+                    
                 </div>
                 <div class="mb-3">
                     <label for="Domicilio" class="form-label">Ingrese el Domicilio</label>
                     <input type="text" class="form-control" name="Domicilio" id="Domicilio" required>
-                    <div class="invalid-feedback">
-                        Por favor ingrese un domicilio.
-                    </div>
+                    
                 </div>
                 <button type="submit" class="btn btn-primary">Guardar</button>
             </form>
@@ -78,37 +69,84 @@
     
 </body>
 
-<!-- <script>
-    (() => {
-        'use strict'
+<script>
+    $.validator.addMethod("regex", function(value, element, regexp) {
+        var re = new RegExp(regexp);
+        return this.optional(element) || re.test(value);
+    }, "El formato es inválido.");
 
-        const forms = document.querySelectorAll('.needs-validation')
+    $("#form").validate({
+        rules: {
+            NroDni:{
+                required: true,
+                regex: /^\d{1,10}$/
+            },
+            Apellido: {
+                required: true,
+                minlength: 2,
+                maxlength: 50,
+                regex: /^[a-zA-Z\s]*$/
+            },
+            Nombre: {
+                required: true,
+                minlength: 2,
+                maxlength: 50,
+                regex: /^[a-zA-Z\s]*$/
+            },
+            fechaNac: {
+                required: true,
+                date: true
+            },
+            Telefono: {
+                required: true,
+                minlength: 6,
+                maxlength: 20,
+                regex: /^[\d-]{6,20}$/
+            },
+            Domicilio: {
+                required: true,
+                minlength: 2,
+                maxlength: 200
+            }
 
-        Array.from(forms).forEach(form => {
-            form.addEventListener('submit', event => {
-                const campoDni = form.querySelector('#NroDni');
-                const campoApellido = form.querySelector('#Apellido');
-                const campoNombre = form.querySelector('#Nombre');
-                const campoTelefono = form.querySelector('#Telefono');
-                const valorDni = campoDni.value;
-                const dniValido = /^\d{8}$/;
+        },
+        messages: {
+            NroDni: {
+                required: "Por favor ingrese el DNI",
+                regex: "El DNI debe tener entre 1 y 10 dígitos numéricos"
+            },
+            Apellido: {
+                required: "Por favor ingrese el Apellido",
+                minlength: "El Apellido debe tener al menos 2 caracteres",
+                maxlength: "El Apellido debe tener menos de 50 caracteres",
+                regex: "El Apellido debe contener solo letras y espacios"
+            },
+            Nombre: {
+                required: "Por favor ingrese el Nombre",
+                minlength: "El Nombre debe tener al menos 2 caracteres",
+                maxlength: "El Nombre debe tener menos de 50 caracteres",
+                regex: "El Nombre debe contener solo letras y espacios"
+            },
+            fechaNac: {
+                required: "Por favor ingrese la fecha de nacimiento",
+                date: "La fecha de nacimiento debe ser una fecha válida"
+            },
+            Telefono: {
+                required: "Por favor ingrese el Teléfono",
+                minlength: "El Teléfono debe tener al menos 6 caracteres",
+                maxlength: "El Teléfono debe tener menos de 20 caracteres",
+                regex: "El Teléfono debe contener solo números"
+            },
+            Domicilio: {
+                required: "Por favor ingrese el Domicilio",
+                minlength: "El Domicilio debe tener al menos 2 caracteres",
+                maxlength: "El Domicilio debe tener menos de 200 caracteres"
+            }
 
-                if (!dniValido.test(valorDni)) {
-                    campoDni.setCustomValidity('El DNI debe tener 8 dígitos numéricos.');
-                    campoDni.classList.add('is-invalid');
-                } else {
-                    campoDni.setCustomValidity('');
-                    campoDni.classList.remove('is-invalid');
-                }
+        }
+    });
 
-                if (!form.checkValidity()) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
+</script>
 
-                form.classList.add('was-validated');
-            }, false);
-        });
-    })();
-</script> -->
+
 </html>

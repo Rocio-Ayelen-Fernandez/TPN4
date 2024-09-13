@@ -16,6 +16,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buscar Auto</title>
     <link rel="stylesheet" href="assets/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <script src="assets/js/jquery-3.7.1.min.js"></script>
+    <script src="assets/js/jquery.validate.js"></script>
+    <link rel="stylesheet" href="assets/css/validate.css">
 </head>
 <body class="conteiner-fluid bg-secondary-subtle">
     <div class="conteiner-m conteiner-fluid bg-secondary-subtle">
@@ -24,14 +27,14 @@
                 <div class="bg-light-subtle border border-2 border-secondary rounded shadow mx-5 p-5">
                 <h3>Buscar Auto</h3>
 
-                <form action="accion/accionCambioDuenio.php" method=POST>
+                <form id="form" action="accion/accionCambioDuenio.php" method=POST>
                     <div class="mb-3">
                     <label for="Patente">Ingrese la patente del auto</label>
-                    <input type="text" name="Patente" id="Patente">
+                    <input type="text" class="form-control" name="Patente" id="Patente">
                     </div>
                     <div class="mb-3">
                     <label for="NroDni">Ingrese el DNI del nuevo dueño</label>
-                    <input type="text" name="NroDni" id="NroDni">
+                    <input type="text" class="form-control" name="NroDni" id="NroDni">
                     </div>
                     <button type="submit" class="btn btn-primary">Buscar</button>
                 </form>
@@ -42,4 +45,37 @@
         </div>
     </div>
 </body>
+
+<script>
+    $.validator.addMethod("regex", function(value, element, regexp) {
+        var re = new RegExp(regexp);
+        return this.optional(element) || re.test(value);
+    }, "El formato es inválido.");
+
+    $("#form").validate({
+        rules: {
+            Patente: {
+                required: true,
+                regex: /^[a-zA-Z]{3} \d{3}$/
+            },
+            NroDni: {
+                required: true,
+                regex: /^\d{1,10}$/
+            }
+
+        },
+        messages: {
+            Patente:{
+                required: "Por favor ingrese la patente",
+                regex: "La patente debe tener 3 letras y 3 números"
+            },
+            NroDni: {
+                required: "Por favor ingrese el DNI",
+                regex: "El DNI debe tener entre 1 y 10 dígitos numéricos"
+            }
+        }
+    });
+
+</script>
+
 </html>

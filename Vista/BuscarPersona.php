@@ -29,7 +29,7 @@
                 <div class="bg-light-subtle border border-2 border-secondary rounded shadow mx-5 p-5">
                 <h3>Buscar Persona</h3>
 
-                <form action="accion/accionBuscarPersona.php" method=POST>
+                <form id="form" action="accion/accionBuscarPersona.php" method=POST>
                     <div class="mb-3">
                     <label for="NroDni">Ingrese el DNI de la persona</label><br>
                     <input type="text" name="NroDni" id="NroDni" class="form-control">
@@ -44,4 +44,31 @@
     </div>
     
 </body>
+
+<script>
+
+    $.validator.addMethod("regex", function(value, element, regexp) {
+        var re = new RegExp(regexp);
+        return this.optional(element) || re.test(value);
+    }, "El formato es inválido.");
+
+    $("#form").validate({
+        rules: {
+            NroDni: {
+                required: true,
+                regex: /^\d{1,10}$/
+            }
+        },
+        messages: {
+            NroDni: {
+                required: "Por favor ingrese el DNI",
+                regex: "El DNI debe tener entre 1 y 10 dígitos numéricos"
+            }
+        },
+        
+    });
+
+</script>
+
+
 </html>

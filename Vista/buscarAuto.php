@@ -51,23 +51,31 @@
     
 </body>
 <script>
+    $.validator.addMethod("regex", function(value, element, regexp) {
+        var re = new RegExp(regexp);
+        return this.optional(element) || re.test(value);
+    }, "El formato es inválido.");
 
     $("#form").validate({
         rules: {
             Patente: {
                 required: true,
-                minlength: 6
+                minlength: 7,
+                maxlength: 7,
+                regex: /^[A-Z]{3} \d{3}$/
             }
         },
         messages: {
             Patente: {
                 required: "Por favor ingrese la patente",
-                minlength: "La patente debe tener al menos 6 caracteres"
+                minlength: "La patente debe tener exactamente 7 caracteres",
+                maxlength: "La patente debe tener exactamente 7 caracteres",
+                regex: "La patente debe tener el formato 'ABC 123'"
             }
         },
         
     });
 
-    </script>
+</script>
 
 </html>
