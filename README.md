@@ -7,7 +7,7 @@
 
 
 ## Descripción
-Se presentan los trabajos TP con sus respectivos ejercicios.
+Se presenta el trabajo TP con sus respectivos ejercicios.
 
 -**N° 4** - PHP / MySql / PDO
 
