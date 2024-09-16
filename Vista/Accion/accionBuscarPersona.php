@@ -57,7 +57,8 @@ $objPersona = $objAbmPersona->buscar($datos);
 
 
                 }else{
-                    echo "<p class='text-warning'>No se encontro la persona en la lista</p><p> ". $objAuto[0]->getMensajeOperacion() ."</p><a class='btn btn-primary' href='../BuscarPersona.php'>Volver</a>";
+                    
+                    echo "<p class='text-warning'>No se encontro la persona en la lista</p><a class='btn btn-primary' href='../BuscarPersona.php'>Volver</a>";
 
                 }
                 ?>
